@@ -1,5 +1,5 @@
 {
-    "name": "sly/notification-pusher",
+    "name": "orhan-proven/notification-pusher",
     "description": "Standalone PHP library for easy devices notifications push.",
     "keywords": ["apple", "iphone", "apns", "android", "gcm", "notification", "message", "push", "pusher"],
     "homepage": "https://github.com/Ph3nol/NotificationPusher",
@@ -14,6 +14,7 @@
             "name": "Contributors",
             "homepage": "https://github.com/Ph3nol/NotificationPusher/contributors"
         }
+
     ],
     "require": {
         "php": ">=5.5",
