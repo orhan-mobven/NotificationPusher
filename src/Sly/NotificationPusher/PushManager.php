@@ -14,6 +14,7 @@ namespace Sly\NotificationPusher;
 use Sly\NotificationPusher\Collection\PushCollection;
 use Sly\NotificationPusher\Adapter\AdapterInterface;
 use Sly\NotificationPusher\Exception\AdapterException;
+use Sly\NotificationPusher\Model\PushInterface;
 
 /**
  * PushManager.
@@ -53,6 +54,25 @@ class PushManager extends PushCollection
         return $this->environment;
     }
 
+    private $pushedDevices = [];
+
+    /**
+     * @return mixed
+     */
+    public function getPushedDevices() {
+
+        return $this->pushedDevices;
+    }
+
+    /**
+     * @param mixed $pushedDevices
+     */
+    public function setPushedDevices($pushedDevices) {
+
+        $this->pushedDevices = $pushedDevices;
+    }
+
+
     /**
      * Push.
      *
@@ -64,9 +84,10 @@ class PushManager extends PushCollection
             $adapter = $push->getAdapter();
             $adapter->setEnvironment($this->getEnvironment());
 
-            if ($adapter->push($push)) {
-                $push->pushed();
-            }
+            $pushedDevices =  $adapter->push($push);
+            $this->pushedDevices[] = $pushedDevices;
+            $push->pushed();
+
         }
 
         return $this;
